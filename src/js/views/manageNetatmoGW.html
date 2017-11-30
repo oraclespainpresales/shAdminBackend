@@ -1,0 +1,73 @@
+<div class="oj-hybrid-padding">
+  <h3><b>Management of Netatmo Gateways</b></h3>
+  <hr>
+
+  <div id="demozone_list" data-bind="visible: showMainTable">
+      <table id="table" summary="Demo Zone List" aria-label="Demozone Table"
+         data-bind="ojComponent: {component: 'ojTable', 
+                                  beforeCurrentRow: currentRowListener,
+                                  data: datasource, 
+                                  columns: [{headerText: 'ID', field: 'id', id: 'id'}, {headerText: 'Demo Zone', 
+                                             field: 'name', 
+                                             id: 'name'},
+                                            {headerText: 'Base Port', 
+                                             field: 'baseport', 
+                                             id: 'baseport'},
+                                            {headerText: 'Status', 
+                                             field: 'status', 
+                                             id: 'status'},
+                                            {headerText: 'Interval(s)', 
+                                             field: 'interval', 
+                                             id: 'interval'},
+                                            {headerText: 'started At', 
+                                             field: 'startedAt', 
+                                             id: 'startedAt'},
+                                            {headerText: 'Period(min.)', 
+                                             field: 'period', 
+                                             id: 'period'},
+                                            {headerText: 'Netatmo Status', 
+                                             field: 'netatmo_status', 
+                                             id: 'netatmo_status'},
+                                            {headerText: 'Netatmo Message', 
+                                             field: 'netatmo_msg', 
+                                             id: 'netatmo_msg'}]}">
+      </table>
+  </div>
+
+  <div id="demozone_detail" data-bind="visible: showDetails">
+      <h4 id="demozone_id"></h4>
+      <div id="demozone_name"></div>
+      <div id="demozone_baseport"></div>
+      <div id="demozone_status"></div>
+      <div id="demozone_interval"></div>
+      <div id="demozone_starttime"></div>
+      <div id="demozone_period"></div>
+      <div id="demozone_netatmo_status"></div>
+      <div id="demozone_netatmo_msg"></div>
+
+    <div id="demozone_back" data-bind="visible: showBack">
+      <hr>
+      <a href="#" id="backToTable_0" data-bind="click: backToTable, ojComponent: { component: 'ojButton' }">Back</a>
+    </div>
+  
+    <div id="demozone_start" data-bind="visible: showStart">
+      <hr>
+      <a href="#" id="startDemozone_0" data-bind="click: startDemozone, ojComponent: { component: 'ojButton' }">Start Demo Zone</a>
+      Time Lasting the process in minutes: <input type="text" id="input_interval" value="">
+    </div>
+  
+    <div id="demozone_stop" data-bind="visible: showStop">
+      <hr>
+      <a href="#" id="stopDemozone_0" data-bind="click: stopDemozone, ojComponent: { component: 'ojButton' }">Stop Demo Zone</a>
+      <hr>
+      <a href="#" id="changeTemp_0" data-bind="click: changeDemozoneTemp, ojComponent: { component: 'ojButton' }">Change Temperature for this Demo Zone</a>
+      New Temperature to be set in the Netatmo device for this Demozone: <input type="text" id="new_temperature" value="">
+    </div>
+  
+    <div id="output_call">
+      <hr>
+      <label for="outputCall" class="oj-label">Output of last action: </label>
+      <span id="actionOutput" data-bind="text: actionOutput"></span>
+    </div>
+
+  </div>

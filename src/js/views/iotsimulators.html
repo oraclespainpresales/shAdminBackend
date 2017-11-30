@@ -1,0 +1,173 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+</script>
+<script type="text/html" id="row_tmpl">  
+    <tr>  
+        <td data-bind="text: demoZone">  
+        </td>  
+        <td data-bind="text: hotelName">  
+        </td>  
+        <td data-bind="text: roomNumber">  
+        </td>  
+        <td data-bind="text: listenPort">  
+        </td>
+        <td><span title="Simulator Status" role="img" data-bind="attr:{class: procStatus != 1 ? 'oj-fwk-icon-status-error' : 'oj-fwk-icon-status-confirmation'}">
+            </span>  
+        </td>  
+        <td data-bind="text: procId">  
+        </td>  
+        <td data-bind="text: startedAt">  
+        </td>  
+        <td data-bind="text: folderName">  
+        </td> 
+        <td data-bind="text: urlToSim">
+        </td>  
+    </tr>  
+</script>
+
+<!-- <span title="Simulator Stopped" role="img" class="oj-fwk-icon-status-error"></span> -->
+<!-- <span title="Simulator Started" role="img" class="oj-fwk-icon-status-confirmation"></span> -->
+<!-- <td><img data-bind="attr:{src: imgURL}"/>  -->
+<!-- <td data-bind="text: ...procStatus...">  -->
+<!-- <td><span title="Simulator Status" role="img" class="oj-fwk-icon-status-confirmation" data-bind="attr:{class: imgClass}"></span>  -->
+<!--        <td><div data-bind="text: procStatus, style: {'background-color': procStatus != 1 ? 'red' : 'green'}"></div> -->
+        
+<div class="oj-hybrid-padding">
+  <h3><b>Management of IoT Simulators</b></h3>
+  <hr>
+  <div id="simulatorTable" class="oj-flex oj-flex-items-pad">
+      <div class="oj-xl-8 oj-lg-8 oj-md-6 oj-flex-item">
+              <button id="refreshButton"
+                      data-bind="click: refreshTable, 
+                      ojComponent: { component: 'ojButton', label: 'Refresh Table' }">
+              </button>                                                                                                                
+
+          <table id="simtable" summary="Simulator List" aria-label="Table of existing IoT Simulators"
+                 data-bind="ojComponent: {component: 'ojTable', 
+                                      data: datasource,
+                                      beforeCurrentRow: currentRowListener, 
+                                      columnsDefault: {sortable: 'none'}, 
+                                      columns: [{headerText: 'Demo Zone', 
+                                                 field: 'demoZone'},
+                                                {headerText: 'Hotel Name', 
+                                                 field: 'hotelName'},
+                                                {headerText: 'Room Number', 
+                                                 field: 'roomNumber'},
+                                                {headerText: 'Listen Port', 
+                                                 field: 'listenPort'},
+                                                {headerText: 'Status', 
+                                                 field: 'procStatus'},
+                                                {headerText: 'Proc Id', 
+                                                 field: 'procId'},
+                                                {headerText: 'Started At', 
+                                                 field: 'startedAt'},
+                                                {headerText: 'Folder Name', 
+                                                 field: 'folderName'},
+                                                {headerText: 'URL to Sim',
+                                                 field: 'urlToSim'}],
+					rowTemplate: 'row_tmpl'}">
+          </table>
+          <hr>
+          Selected Simulator: <ul><span id="selectedSimulator"></span></ul><ul><a><span id="simulatorLink"></span></a></ul>
+     <!-- <button display="icons" data-bind="click: window.open(urlToSim, '_blank'), attr:{id: urlToSim, label: urlToSim}, ojComponent: { component: 'ojButton'}"> -->
+     <!--      <button id="openSimulator_" 
+                  display="icons" 
+                  data-bind="click: window.open(urlOfSelectedSim(), '_blank'),
+                             visible: enableOpenSim, 
+                             ojComponent: { component: 'ojButton', label: urlOfSelectedSim}"/> -->
+      </div>
+  </div>
+    <hr>
+  <div id="simulatorActions" class="oj-flex oj-flex-items-pad">
+      <div class="oj-xl-4 oj-lg-4 oj-md-6 oj-flex-item">
+        <br/>
+          <div class="oj-flex oj-flex-items-pad">
+              <button id="start"
+                      data-bind="click: onActionSimulator, 
+                      ojComponent: { component: 'ojButton', label: 'StartSimulator' }">
+              </button>          
+
+              <button id="stop"
+                      data-bind="click: onActionSimulator, 
+                      ojComponent: { component: 'ojButton', label: 'StopSimulator' }">
+              </button>          
+
+              <button id="delete"
+                      data-bind="click: onActionSimulator, 
+                      ojComponent: { component: 'ojButton', label: 'Delete Simulator' }">
+              </button>                                                                                                                
+          </div>
+        <br/>
+        <br/>
+        <label for="outputCall" class="oj-label">Output of last API call: </label>
+        <!-- <span id="outputCall" data-bind="text: ko.toJSON(actionOutput)"></span> -->
+        <span id="actionOutput" data-bind="text: actionOutput"></span>
+
+      </div>
+
+
+      <div class="oj-xl-4 oj-lg-4 oj-md-6 oj-flex-item">
+        <br/>
+        <h4>New Simulator:</h4>
+        <br/>
+
+          <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <label for="spinnercontrol">Demo Zone</label>
+              </div>
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <!-- <input id="demoZoneInput"
+                         data-bind="ojComponent: {
+                         component: 'ojInputText',
+                         value: inputDemoZone}"/> -->
+                  <select id="demoZoneSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                                    value: inputDemoZone,
+                                                    options: zoneList,
+                                                    rootAttributes: {style:'max-width:20em'}}">
+                  </select>
+              </div>
+          </div>     
+          <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <label for="inputcontrol">Hotel Name (Valid characters: alphnumeric, - and .)</label>
+              </div>
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <input id="hotelNameInput"
+                         data-bind="ojComponent: {
+                         component: 'ojInputText', 
+                         value: inputHotelName}"/> 
+              </div>
+          </div>             
+          <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <label for="spinnercontrol">Room Number</label>
+              </div>
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <input id="roomNumberInput"
+                         data-bind="ojComponent: {
+                         component: 'ojInputNumber',
+                         max: 999, min: 101, step: 1, value: inputRoomNumber}"/>
+              </div>
+          </div>
+          <div class="oj-flex oj-flex-items-pad">
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <label for="spinnercontrol">Room Type</label>
+              </div>
+              <div class="oj-flex-item deprecated-col-default-width">
+                  <input id="comboRoomType" list="roomTypeList" data-bind="ojComponent: {component: 'ojCombobox', value: inputRoomType, rootAttributes: {style:'max-width:20em'}, multiple: false}"/>
+                  <datalist id="roomTypeList">
+                    <option value="SINGLE">Single Room</option>
+                    <option value="DOUBLE">Double Room</option>
+                  </datalist>
+              </div>
+          </div>
+              <button id="createSimulator"
+                      data-bind="click: createSimulator, 
+                      ojComponent: { component: 'ojButton', label: 'Create New Simulator' }">
+              </button>
+      </div>
+  </div>
+
+</div>

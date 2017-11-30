@@ -1,0 +1,25 @@
+<table id="table" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                beforeCurrentRow: currentRowListener,
+                                data: datasource, 
+                                selectionMode: {row: 'multiple', column: 'multiple'}, 
+                                columns: [{headerText: 'Department Id', 
+                                           field: 'DepartmentId', 
+                                           id: 'column1'},
+                                          {headerText: 'Department Name', 
+                                           field: 'DepartmentName', 
+                                           id: 'column2'},
+                                          {headerText: 'Location Id', 
+                                           field: 'LocationId', 
+                                           id: 'column3'},
+                                          {headerText: 'Manager Id', 
+                                           field: 'ManagerId', 
+                                           id: 'column4'}]}">
+</table>
+<br><br>
+<label><b>Selection Event</b><br><textarea id="selectionEventLog" style="height: 50px; width: 300px;"></textarea></label>
+<span><br>http://jet.us.oracle.com/3.0.0/jetCookbook.html?component=table&demo=selectableTable
+<br>http://jet.us.oracle.com/3.2.0/jetCookbook.html?component=table&demo=customTable</span>
+
+<div id="selectedDepartmentName"></div>
+<div id="selectedDepartmentId"></div>

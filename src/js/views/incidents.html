@@ -1,0 +1,23 @@
+<div data-bind="visible: showMainTable">
+  <table id="table" summary="Department List" aria-label="Departments Table"
+       data-bind="event: {ojbeforecurrentrow: currentRowListener},
+                  ojComponent: {component: 'ojTable', 
+                                beforecurrentrow: tableListener, 
+                                data: datasource, 
+                                columnsDefault: {sortable: 'none'}, 
+                                columns: [{headerText: 'Department Id', 
+                                           field: 'DepartmentId'},
+                                          {headerText: 'Department Name', 
+                                           field: 'DepartmentName'},
+                                          {headerText: 'Location Id', 
+                                           field: 'LocationId'},
+                                          {headerText: 'Manager Id', 
+                                           field: 'ManagerId'}]}">
+  </table>
+</div>
+<div data-bind="visible: showDetails">
+  <hr>
+  <span id="selectedDepartmentId"></span>
+  <span id="selectedDepartmentName"></span>
+  <a href="#" id="showdetails_0" data-bind="click: toggleTable, ojComponent: { component: 'ojButton' }">Ver Tabla</a>
+</div>

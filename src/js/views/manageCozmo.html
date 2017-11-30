@@ -1,0 +1,105 @@
+<!-- <div class="oj-hybrid-padding"> -->
+<div class="container">
+  <div class="oj-flex-items-pad">
+    <h3><b>Cozmo Management</b></h3>
+    <hr>
+    <div id="DemozoneSelection" data-bind="visible: showDemozoneSelection" class="oj-flex-item">
+        <label for="basicSelect" class="oj-label-inline">Select Demo Zone</label>
+        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                              value: zone,
+                                              options: zoneList,
+                                              rootAttributes: {style:'max-width:20em'}}">
+        </select>
+        <button id="selectDZ" class="oj-button-primary"
+               data-bind="ojComponent: {
+                    component:'ojButton', label: 'Select',
+                    icons: {end: 'oj-fwk-icon-caret-end oj-fwk-icon'},
+                    disabled: false, chroming: 'full'
+               }, click: startButtonClick">Start</button>
+
+        <br/>
+        <!-- <label for="curr-value" class="oj-label">Current selected Demo Zone is  </label>
+        <span id="curr-value" data-bind="text: zone"></span> -->
+        <hr>
+    </div>
+  </div>
+
+  <div id="SelectedDemozone" data-bind="visible: showSelectedDemozone" class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h4>Demo Zone to work with: <span id="selectedDemozone"/></h4>
+    </div>
+    <div class="oj-flex-item">
+      <button id="backToDemozoneSelection" class="oj-button-primary"
+             data-bind="ojComponent: {
+                  component:'ojButton', label: 'Back to Demozone Selection',
+                  disabled: false, chroming: 'full'
+             }, click: backToDemozoneSelection"/>
+    </div>
+    <br/>
+  </div>
+
+  <div id="CozmoActions" data-bind="visible: showCozmoActions">
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <button id="reset"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'Reset Cozmo' }">
+              </button>
+          </div>
+      </div>
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <button id="lightCube1"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'light cube 1' }">
+              </button> 
+          </div>
+          <div class="oj-flex-item">
+              <button id="lightCube2"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'light cube 2' }">
+              </button>
+          </div>
+          <div class="oj-flex-item">
+              <button id="lightCube3"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'light Cube 3' }">
+              </button>
+          </div>
+          <div class="oj-flex-item">
+              <button id="switchOffCubes"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'switch-off all cubes' }">
+              </button> 
+          </div>
+      </div>
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <button id="simRoomService"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'Test Room Service' }">
+              </button> 
+          </div>
+          <div class="oj-flex-item">
+              <button id="simIncident"
+                      data-bind="click: onCozmoAction, 
+                      ojComponent: { component: 'ojButton', label: 'Test Incident' }">
+          </div>
+      </div>
+      <hr>
+  </div>
+
+  <div id="CozmoOutputAction" data-bind="visible: showCozmoOutputActions" class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+        <br/>
+        <br/>
+        <label for="outputCall" class="oj-label">Output of last API call: </label>
+        <!-- <span id="outputCall" data-bind="text: ko.toJSON(actionOutput)"></span> -->
+        <span id="actionOutput" data-bind="text: actionOutput"></span>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="oj-flex-items-pad">
+    <h3><b>Nuki Management</b></h3>
+    <hr>
+    <div id="DemozoneSelection" data-bind="visible: showDemozoneSelection" class="oj-flex-item">
+        <label for="basicSelect" class="oj-label-inline">Select Demo Zone</label>
+        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                              value: zone,
+                                              options: zoneList,
+                                              rootAttributes: {style:'max-width:20em'}}">
+        </select>
+        <button id="selectDZ" class="oj-button-primary"
+               data-bind="ojComponent: {
+                    component:'ojButton', label: 'Select',
+                    icons: {end: 'oj-fwk-icon-caret-end oj-fwk-icon'},
+                    disabled: false, chroming: 'full'
+               }, click: startButtonClick">Start</button>
+
+        <br/>
+        <!-- <label for="curr-value" class="oj-label">Current selected Demo Zone is  </label>
+        <span id="curr-value" data-bind="text: zone"></span> -->
+        <hr>
+    </div>
+  </div>
+
+  <div id="SelectedDemozone" data-bind="visible: showSelectedDemozone" class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+      <h4>Demo Zone to work with: <span id="selectedDemozone"/></h4>
+    </div>
+    <div class="oj-flex-item">
+      <button id="backToDemozoneSelection" class="oj-button-primary"
+             data-bind="ojComponent: {
+                  component:'ojButton', label: 'Back to Demozone Selection',
+                  disabled: false, chroming: 'full'
+             }, click: backToDemozoneSelection"/>
+    </div>
+    <br/>
+  </div>
+
+  <div id="NukiActions" data-bind="visible: showNukiActions">
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <!-- <label for="currentNgrok" class="oj-label">Current NGROK: <span id="currentNgrok" data-bind="text: currentNgrok"/></label> -->
+              <label class="oj-label">Current NGROK: </label>
+              <span id="currentNgrok" data-bind="text: currentNgrok"></span>
+          </div>
+      </div>
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <button id="refreshNgrok"
+                      data-bind="click: refreshNgrok, 
+                      ojComponent: { component: 'ojButton', label: 'Refresh Ngrok URL' }">
+              </button>
+          </div>
+      </div>
+      <hr>
+      <div class="oj-flex oj-sm-flex-items-initial">
+          <div class="oj-flex-item">
+              <!-- <button id="openDoor" disabled=[[disableOpenDoor]] -->
+                      <!-- ojComponent: { component: 'ojButton', label: 'Open Door', disabled: disableOpenDoor }">  -->
+              <button id="openDoor" 
+                      data-bind="click: onNukiAction, visible: enableOpenDoor,
+                      ojComponent: { component: 'ojButton', label: 'Open Door' }"> 
+              </button> 
+          </div>
+      </div>
+      <hr>
+  </div>
+
+  <div id="NukiOutputAction" data-bind="visible: showNukiOutputActions" class="oj-flex oj-flex-items-pad">
+    <div class="oj-flex-item">
+        <br/>
+        <br/>
+        <label for="actionOutput" class="oj-label">Output of last API call: </label>
+        <!-- <span id="outputCall" data-bind="text: ko.toJSON(actionOutput)"></span> -->
+        <span id="actionOutput" data-bind="text: actionOutput"></span>
+    </div>
+  </div>
+
+</div>
