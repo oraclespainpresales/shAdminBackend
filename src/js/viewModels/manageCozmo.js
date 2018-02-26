@@ -54,9 +54,12 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
       var dmz_url = "http://new.soa.digitalpracticespain.com";
 
       self.onCozmoAction = function (data, event) {
+        self.actionOutput(' ');
+        console.log("**** Cleaned output!!!! ****");
         var dz = self.zone().toString();
         var dzLower = dz.toLowerCase();
-        var svc_url = dmz_url + "/SH_Gadgets_Helper/SendCozmoService/devices/COZMO";
+        //var svc_url = dmz_url + "/SH_Gadgets_Helper/SendCozmoService/devices/COZMO";
+        var svc_url = dmz_url + "/SH_Gadgets_Helper/SendCozmoService/devices/execute/COZMO?demozone=" + dz;
         var post_msg="";
         var actionStr = event.currentTarget.id.toString();
         switch(actionStr) {
@@ -64,29 +67,37 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             svc_url = dmz_url + "/admin/server/" + dzLower + "/kioskin/cozmo/restart"; 
             break;
           case 'lightCube1':
-            post_msg = {'demozone':dz,'op':'ON1'}; 
+            //post_msg = {'demozone':dz,'op':'ON1'}; 
+            svc_url = svc_url + "&op=ON1";
             break;
           case 'lightCube2':
-            post_msg = {'demozone':dz,'op':'ON2'}; 
+            //post_msg = {'demozone':dz,'op':'ON2'}; 
+            svc_url = svc_url + "&op=ON2";
             break;
           case 'lightCube3':
-            post_msg = {'demozone':dz,'op':'ON3'}; 
+            //post_msg = {'demozone':dz,'op':'ON3'}; 
+            svc_url = svc_url + "&op=ON3";
             break;
           case 'switchOffCubes':
-            post_msg = {'demozone':dz,'op':'OFF'}; 
+            //post_msg = {'demozone':dz,'op':'OFF'}; 
+            svc_url = svc_url + "&op=OFF";
             break;
           case 'simRoomService':
-            post_msg = {'demozone':dz,'op':'SERVICE','params':{'room':201,'service':'Hamburguer Menu'}}; 
+            //post_msg = {'demozone':dz,'op':'SERVICE','params':{'room':201,'service':'Hamburguer Menu'}}; 
             break;
           case 'simIncident':
-            post_msg = {'demozone':dz,'op':'MAINTENANCE'}; 
+            //post_msg = {'demozone':dz,'op':'MAINTENANCE'}; 
             break;
         }
         console.log("event.currentTarget.id: " + event.currentTarget.id);
         console.log("Service URL: " + svc_url);
         console.log("Data POST: " + JSON.parse(JSON.stringify(post_msg)).toString());
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("POST", svc_url, false);
+        if (actionStr != "reset") {
+          xmlhttp.open("GET", svc_url, false);
+        } else {
+          xmlhttp.open("POST", svc_url, false);
+        }
         //xmlhttp.setRequestHeader("cache-control", "no-cache");
         xmlhttp.onreadystatechange = function () {
           console.log("xmlhttp.status: " + xmlhttp.status);
